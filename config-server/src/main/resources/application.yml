@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/ayushCog/safeschoolConfigServer
+          skipSslValidation: true
+
+server:
+  port: 8888
+
