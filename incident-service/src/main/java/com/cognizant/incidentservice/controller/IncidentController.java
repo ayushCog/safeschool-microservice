@@ -21,7 +21,7 @@ public class IncidentController {
     @Autowired
     IIncidentService incidentServiceImpl;
 
-    //@PreAuthorize("isAuthenticated() && !hasAnyRole('STUDENT', 'PARENT')")
+    @PreAuthorize("isAuthenticated() && !hasAnyRole('STUDENT', 'PARENT')")
     @GetMapping("/")
     public ResponseEntity<SuccessResponseProjection<List<IncidentProjection>>> getAllIncidents(){
         log.info("Received GET request: Fetching all incidents");

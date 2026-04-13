@@ -24,7 +24,12 @@
 		<module>api-gateway</module>
 		<module>auth-service</module>
 		<module>user-service</module>
-		<module>config-server</module>
+		<module>incident-service</module>
+		<module>resolution-service</module>
+		<module>program-service</module>
+		<module>training-service</module>
+		<module>notification-service</module>
+		<module>compliance-service</module>
 	</modules>
 
 	<properties>

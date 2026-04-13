@@ -2,6 +2,7 @@ package com.cognizant.programservice.proxy;
 
 
 
+import com.cognizant.programservice.config.FeignConfig;
 import com.cognizant.programservice.projection.SuccessResponseProjection;
 import com.cognizant.programservice.projection.UserProjection;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 
-@FeignClient(name = "user-service")
+@FeignClient(name = "user-service", configuration = FeignConfig.class)
 public interface UserProxy {
 
     @GetMapping("/user/{id}")

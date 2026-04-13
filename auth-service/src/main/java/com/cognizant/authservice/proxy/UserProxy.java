@@ -1,5 +1,6 @@
 package com.cognizant.authservice.proxy;
 
+import com.cognizant.authservice.config.FeignConfig;
 import com.cognizant.authservice.dto.ParentRegistrationDto;
 import com.cognizant.authservice.dto.StudentRegistrationDto;
 import com.cognizant.authservice.dto.UserRegistrationDto;
@@ -11,7 +12,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 
-@FeignClient(name="user-service")
+@FeignClient(name="user-service", configuration = FeignConfig.class)
 public interface UserProxy {
     @PostMapping("/user/register")
     public ResponseEntity<SuccessResponseProjection<UserProjection>> registerUser(UserRegistrationDto userRegistrationDto);

@@ -1,4 +1,4 @@
-package com.cognizant.authservice.config;
+package com.cognizant.complianceservice.config;
 
 import feign.RequestInterceptor;
 import jakarta.servlet.http.HttpServletRequest;

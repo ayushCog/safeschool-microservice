@@ -1,8 +1,10 @@
-package com.cognizant.trainingservice.proxy;
+package com.cognizant.complianceservice.proxy;
 
-import com.cognizant.trainingservice.config.FeignConfig;
-import com.cognizant.trainingservice.projection.SuccessResponseProjection;
-import com.cognizant.trainingservice.projection.UserProjection;
+
+
+import com.cognizant.complianceservice.config.FeignConfig;
+import com.cognizant.complianceservice.projection.SuccessResponseProjection;
+import com.cognizant.complianceservice.projection.UserProjection;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
