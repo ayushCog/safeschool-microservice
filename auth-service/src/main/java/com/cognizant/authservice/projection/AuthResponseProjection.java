@@ -8,5 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 public class AuthResponseProjection {
+    private String email;
     private String token;
 }

@@ -12,4 +12,5 @@ public interface IUserService {
     public SuccessResponseProjection<List<Long>> getUserIdsByRole(String role);
     public SuccessResponseProjection<UserProjection> getUserById(Long id);
     public SuccessResponseProjection<Boolean> checkUserExists(Long id);
+    public SuccessResponseProjection<UserProjection> getUserByEmail(String email);
 }

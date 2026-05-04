@@ -82,4 +82,28 @@ public class UserServiceImpl implements IUserService {
 
         return new SuccessResponseProjection<>(true, "Existence check completed", exists);
     }
+
+    public SuccessResponseProjection<UserProjection> getUserByEmail(String email) throws UserException {
+        log.info("Received service request: Fetching user details for Email: {}", email);
+
+        User user = userRepository.findUserByEmail(email);
+
+        if (user == null) {
+            log.error("Fetch failed: User with Email: {} not found", email);
+            throw new UserException("User not found with email: " + email, HttpStatus.NOT_FOUND);
+        }
+
+        UserProjection userProjection = new UserProjection(
+                user.getUserId(),
+                user.getName(),
+                user.getRole(),
+                user.getEmail(),
+                user.getPhone(),
+                user.getStatus()
+        );
+
+        log.info("Successfully fetched and projected User: {}", email);
+
+        return new SuccessResponseProjection<>(true, "User details fetched successfully", userProjection);
+    }
 }

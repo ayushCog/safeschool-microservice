@@ -25,8 +25,6 @@ public class Student {
     @NotNull(message = "Student must be linked to a User account")
     private User user;
 
-    @NotNull(message = "Date of birth is required")
-    @Past(message = "Date of birth must be in the past")
     private LocalDate dob;
 
     @NotBlank(message = "Gender is required")

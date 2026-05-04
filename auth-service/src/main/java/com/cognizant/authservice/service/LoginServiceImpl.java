@@ -38,7 +38,7 @@ public class LoginServiceImpl implements ILoginService {
 
         String jwt = jwtUtil.generateToken(user.getEmailId(), user.getRole());
 
-        AuthResponseProjection authData = new AuthResponseProjection(jwt);
+        AuthResponseProjection authData = new AuthResponseProjection(request.getEmail(), jwt);
         return new SuccessResponseProjection<>(true, "User logged in successfully", authData);
     }
 }

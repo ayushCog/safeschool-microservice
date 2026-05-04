@@ -26,8 +26,6 @@ public class StudentRegistrationDto {
 
     private String status = "ACTIVE";
 
-    @NotNull(message = "Date of birth is required")
-    @Past(message = "DOB must be in the past")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate dob;
 

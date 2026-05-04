@@ -49,4 +49,13 @@ public class UserController {
         log.info("Received GET request: Checking existence for User ID: {}", id);
         return ResponseEntity.status(HttpStatus.OK).body(userService.checkUserExists(id));
     }
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<SuccessResponseProjection<UserProjection>> getUserByEmail(@PathVariable("email") String email) {
+        log.info("Received GET request: Fetching user details for Email: {}", email);
+
+        SuccessResponseProjection<UserProjection> response = userService.getUserByEmail(email);
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 }
