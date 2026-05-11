@@ -33,6 +33,11 @@ public class ParentServiceImpl implements IParentService {
     @Transactional
     @CircuitBreaker(name="parentRegister")
     public SuccessResponseProjection<ParentProjection> addParent(ParentRegistrationDto parentRegistrationDto) {
+        if(authRepository.findByEmailId(parentRegistrationDto.getEmail()) != null){
+            log.error("Parent registration failed: Email: {} is already taken", parentRegistrationDto.getEmail());
+            throw new AuthException("User already registered", HttpStatus.CONFLICT);
+        }
+
         String rawPassword = parentRegistrationDto.getPassword();
         parentRegistrationDto.setPassword(null);
 

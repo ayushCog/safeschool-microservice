@@ -32,6 +32,11 @@ public class UserServiceImpl implements IUserService{
     @Transactional
     @CircuitBreaker(name="userRegister")
     public SuccessResponseProjection<UserProjection> addUser(UserRegistrationDto userRegistrationDto) {
+        if(authRepository.findByEmailId(userRegistrationDto.getEmail()) != null){
+            log.error("User registration failed: Email: {} is already taken", userRegistrationDto.getEmail());
+            throw new AuthException("User already registered", HttpStatus.CONFLICT);
+        }
+
         String rawPassword = userRegistrationDto.getPassword();
         userRegistrationDto.setPassword(null);
 

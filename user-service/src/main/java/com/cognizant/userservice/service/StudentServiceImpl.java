@@ -38,6 +38,7 @@ public class StudentServiceImpl implements IStudentService{
         user.setEmail(studentRegistrationDto.getEmail());
         user.setRole(studentRegistrationDto.getRole().toUpperCase());
         user.setPhone(studentRegistrationDto.getPhone());
+        studentRegistrationDto.setStatus("Active");
         user.setStatus(studentRegistrationDto.getStatus());
 
         User savedUser = userRepository.save(user);

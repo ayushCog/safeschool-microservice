@@ -55,9 +55,10 @@ public class ResolutionServiceImpl implements IResolutionService {
         resolution.setDate(resolutionDto.getDate());
         resolution.setStatus(resolutionDto.getStatus());
 
+        incidentProxy.updateIncidentStatus(resolutionDto.getIncidentId(), resolutionDto.getStatus());
+
         Resolution savedRes = resolutionRepository.save(resolution);
 
-        incidentProxy.updateIncidentStatus(resolutionDto.getIncidentId(), resolutionDto.getStatus());
 
         log.info("Successfully recorded Resolution ID: {} and triggered status update for Incident: {}",
                 savedRes.getResolutionId(), resolutionDto.getIncidentId());

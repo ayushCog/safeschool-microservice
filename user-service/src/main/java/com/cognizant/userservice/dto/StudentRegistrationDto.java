@@ -29,9 +29,7 @@ public class StudentRegistrationDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate dob;
 
-    @NotBlank(message = "Gender is required")
     private String gender;
 
-    @NotBlank(message = "Address is required")
     private String address;
 }

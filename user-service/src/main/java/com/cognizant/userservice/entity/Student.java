@@ -27,10 +27,8 @@ public class Student {
 
     private LocalDate dob;
 
-    @NotBlank(message = "Gender is required")
     private String gender;
 
-    @NotBlank(message = "Address is required")
     private String address;
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)

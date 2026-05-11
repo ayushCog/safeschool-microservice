@@ -32,6 +32,11 @@ public class StudentServiceImpl implements IStudentService{
     @Transactional
     @CircuitBreaker(name="studentRegister")
     public SuccessResponseProjection<StudentProjection> addStudent(StudentRegistrationDto studentRegistrationDto) {
+        if(authRepository.findByEmailId(studentRegistrationDto.getEmail()) != null){
+            log.error("Student registration failed: Email: {} is already taken", studentRegistrationDto.getEmail());
+            throw new AuthException("User already registered", HttpStatus.CONFLICT);
+        }
+
         String rawPassword = studentRegistrationDto.getPassword();
         studentRegistrationDto.setPassword(null);
 
