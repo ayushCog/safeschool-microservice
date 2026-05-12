@@ -33,14 +33,18 @@ public class NotificationController {
         return ResponseEntity.status(HttpStatus.OK).body(notificationServiceImpl.markAsRead(userId, notificationId));
     }
 
-    //@PreAuthorize("isAuthenticated() && !hasAnyRole('STUDENT', 'PARENT')")
     @PostMapping("/broadcast")
     public ResponseEntity<SuccessResponseProjection<String>> broadcastAlert(@Valid @RequestBody NotificationDto notificationDto) {
         log.info("Received POST request: Broadcast initiated. Category: {}", notificationDto.getCategory());
         return ResponseEntity.status(HttpStatus.CREATED).body(notificationServiceImpl.broadcastAlert(notificationDto));
     }
 
-    //@PreAuthorize("isAuthenticated() && !hasAnyRole('STUDENT', 'PARENT')")
+    @PostMapping("/create")
+    public ResponseEntity<SuccessResponseProjection<String>> createNotification(@Valid @RequestBody NotificationDto notificationDto) {
+        log.info("Received POST request: Create for {}", notificationDto.getEntityId());
+        return ResponseEntity.status(HttpStatus.CREATED).body(notificationServiceImpl.createNotification(notificationDto));
+    }
+
     @PostMapping("/role/{role}")
     public ResponseEntity<SuccessResponseProjection<String>> sendGroupAlert(@PathVariable String role, @Valid @RequestBody NotificationDto notificationDto) {
         log.info("Received POST request: Role-based alert for Role: {} initiated. Category: {}", role, notificationDto.getCategory());

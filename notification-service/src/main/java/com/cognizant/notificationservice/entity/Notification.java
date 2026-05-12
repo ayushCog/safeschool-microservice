@@ -30,7 +30,6 @@ public class Notification {
     @Size(max = 500)
     private String message;
 
-    @NotBlank(message = "Category is required")
     private String category;
 
     @NotBlank(message = "Status is required")

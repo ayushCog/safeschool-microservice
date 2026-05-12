@@ -78,6 +78,25 @@ public class NotificationServiceImpl implements INotificationService {
 
     @Transactional
     @CircuitBreaker(name="getUser")
+    public SuccessResponseProjection<String> createNotification(NotificationDto notificationDto) {
+        log.info("Service request: Create for: {}", notificationDto.getEntityId());
+
+        boolean user = userProxy.checkUserExists(notificationDto.getUserId()).getBody().getData();
+        log.info("Found user to receive alert");
+
+        Notification n = new Notification();
+        n.setUserId(notificationDto.getUserId());
+        n.setEntityId(notificationDto.getEntityId());
+        n.setMessage(notificationDto.getMessage());
+        n.setStatus("UNREAD");
+        n.setCreatedDate(LocalDateTime.now());
+
+        notificationRepository.save(n);
+        return new SuccessResponseProjection<>(true, "Alert sent to users", notificationDto.getMessage());
+    }
+
+    @Transactional
+    @CircuitBreaker(name="getUser")
     public SuccessResponseProjection<String> sendGroupAlert(String role, NotificationDto notificationDto) {
         log.info("Service request: Processing role-based alert for Group: {}", role);
 

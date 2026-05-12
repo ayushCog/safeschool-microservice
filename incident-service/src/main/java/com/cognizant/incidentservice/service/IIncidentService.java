@@ -11,5 +11,5 @@ public interface IIncidentService {
     public SuccessResponseProjection<List<IncidentProjection>> getUserIncidents(Long userId);
     public SuccessResponseProjection<IncidentProjection> createIncident(IncidentDto incidentDto);
     public SuccessResponseProjection<Boolean> checkIncidentExists(Long id);
-    public SuccessResponseProjection<String> updateIncidentStatus(Long id, String status);
+    public SuccessResponseProjection<Long> updateIncidentStatus(Long id, String status);
 }

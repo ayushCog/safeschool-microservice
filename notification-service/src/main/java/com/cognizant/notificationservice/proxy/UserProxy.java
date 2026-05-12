@@ -18,4 +18,7 @@ public interface UserProxy {
 
     @GetMapping("/user/all-ids/role/{role}")
     ResponseEntity<SuccessResponseProjection<List<Long>>> getUserIdsByRole(@PathVariable("role") String role);
+
+    @GetMapping("/user/exist/{id}")
+    ResponseEntity<SuccessResponseProjection<Boolean>> checkUserExists(@PathVariable("id") Long id);
 }

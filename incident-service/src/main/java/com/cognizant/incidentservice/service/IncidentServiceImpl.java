@@ -89,7 +89,7 @@ public class IncidentServiceImpl implements IIncidentService {
     }
 
     @Transactional
-    public SuccessResponseProjection<String> updateIncidentStatus(Long id, String status) {
+    public SuccessResponseProjection<Long> updateIncidentStatus(Long id, String status) {
         log.info("Service: Attempting to update status for Incident ID: {}", id);
 
         Incident incident = incidentRepository.findById(id)
@@ -103,6 +103,6 @@ public class IncidentServiceImpl implements IIncidentService {
         incidentRepository.save(incident);
 
         log.info("Service: Incident ID {} status changed from {} to {}", id, oldStatus, status);
-        return new SuccessResponseProjection<>(true, "Incident status updated successfully", status);
+        return new SuccessResponseProjection<>(true, "Incident status updated successfully", incident.getReporterId());
     }
 }

@@ -14,5 +14,5 @@ public interface IncidentProxy {
     ResponseEntity<SuccessResponseProjection<Boolean>> checkIncidentExists(@PathVariable("id") Long id);
 
     @PostMapping("/incidents/update/{id}")
-    ResponseEntity<SuccessResponseProjection<String>> updateIncidentStatus(@PathVariable("id") Long id, String status);
+    ResponseEntity<SuccessResponseProjection<Long>> updateIncidentStatus(@PathVariable("id") Long id, String status);
 }

@@ -1,6 +1,8 @@
 package com.cognizant.resolutionservice.service;
 
+import com.cognizant.resolutionservice.dto.NotificationDto;
 import com.cognizant.resolutionservice.proxy.IncidentProxy;
+import com.cognizant.resolutionservice.proxy.NotificationProxy;
 import com.cognizant.resolutionservice.proxy.UserProxy;
 import com.cognizant.resolutionservice.classexception.ResolutionException;
 import com.cognizant.resolutionservice.dto.ResolutionDto;
@@ -31,6 +33,9 @@ public class ResolutionServiceImpl implements IResolutionService {
     @Autowired
     private UserProxy userProxy;
 
+    @Autowired
+    private NotificationProxy notificationProxy;
+
     @Transactional
     @CircuitBreaker(name="checkIncident")
     public SuccessResponseProjection<ResolutionProjection> createResolution(ResolutionDto resolutionDto) {
@@ -55,10 +60,15 @@ public class ResolutionServiceImpl implements IResolutionService {
         resolution.setDate(resolutionDto.getDate());
         resolution.setStatus(resolutionDto.getStatus());
 
-        incidentProxy.updateIncidentStatus(resolutionDto.getIncidentId(), resolutionDto.getStatus());
+        Long userId=incidentProxy.updateIncidentStatus(resolutionDto.getIncidentId(), resolutionDto.getStatus()).getBody().getData();
 
         Resolution savedRes = resolutionRepository.save(resolution);
 
+        notificationProxy.createNotification(new NotificationDto(
+                resolutionDto.getIncidentId(),
+                userId,
+                "Resolution for Incident ID: " + resolutionDto.getIncidentId() + " has been recorded with status: " + resolutionDto.getStatus()
+        ));
 
         log.info("Successfully recorded Resolution ID: {} and triggered status update for Incident: {}",
                 savedRes.getResolutionId(), resolutionDto.getIncidentId());

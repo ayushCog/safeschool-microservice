@@ -47,7 +47,7 @@ public class IncidentController {
     }
 
     @PostMapping("/update/{id}")
-    public ResponseEntity<SuccessResponseProjection<String>> updateIncidentStatus(@PathVariable("id") Long id, @RequestBody String status) {
+    public ResponseEntity<SuccessResponseProjection<Long>> updateIncidentStatus(@PathVariable("id") Long id, @RequestBody String status) {
         log.info("Received PUT request: Updating Incident ID: {} to Status: {}", id, status);
         return ResponseEntity.status(HttpStatus.OK).body(incidentServiceImpl.updateIncidentStatus(id, status));
     }

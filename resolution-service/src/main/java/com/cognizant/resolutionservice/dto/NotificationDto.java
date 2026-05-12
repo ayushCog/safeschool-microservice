@@ -1,4 +1,4 @@
-package com.cognizant.notificationservice.dto;
+package com.cognizant.resolutionservice.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -13,14 +13,9 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class NotificationDto {
-    private Long entityId=1L;
-
+    private Long entityId;
     private Long userId;
 
     @NotBlank(message = "Message is required")
     private String message;
-
-    private String category="Not applicable";
-    private String status;
-    private LocalDateTime createdDate;
 }
